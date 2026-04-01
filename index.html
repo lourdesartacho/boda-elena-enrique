@@ -1129,20 +1129,14 @@
     submitBtn.textContent = 'Enviando...';
 
     try {
-      const resp = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      const body = new URLSearchParams();
+      Object.entries(payload).forEach(([k, v]) => body.append(k, String(v ?? '')));
 
-      const data = await resp.json().catch(() => ({}));
-      if (!resp.ok || data.ok === false) {
-        if (data.duplicate) {
-          alert('Ya existe una confirmacion con ese nombre o acompanante.');
-          return;
-        }
-        throw new Error('Error en el envio');
-      }
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body
+      });
 
       alert('Gracias! Confirmacion enviada.');
       saveLocalRegisteredNames([nombreNorm, acompananteNorm]);
