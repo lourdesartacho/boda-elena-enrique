@@ -1084,6 +1084,35 @@
     localStorage.setItem(RSVP_NAMES_KEY, JSON.stringify(Array.from(existing)));
   }
 
+  function postToGoogle(payloadData) {
+    let sink = document.getElementById('rsvpSink');
+    if (!sink) {
+      sink = document.createElement('iframe');
+      sink.name = 'rsvpSink';
+      sink.id = 'rsvpSink';
+      sink.style.display = 'none';
+      document.body.appendChild(sink);
+    }
+
+    const postForm = document.createElement('form');
+    postForm.method = 'POST';
+    postForm.action = GOOGLE_SCRIPT_URL;
+    postForm.target = 'rsvpSink';
+    postForm.style.display = 'none';
+
+    Object.entries(payloadData).forEach(([k, v]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = k;
+      input.value = String(v ?? '');
+      postForm.appendChild(input);
+    });
+
+    document.body.appendChild(postForm);
+    postForm.submit();
+    postForm.remove();
+  }
+
   rsvpForm.addEventListener('submit', async e => {
     e.preventDefault();
 
@@ -1124,37 +1153,30 @@
     payload.nombre_completo_normalizado = nombreNorm;
     payload.acompanante_normalizado = acompananteNorm;
     payload.action = 'register_rsvp';
+    payload.tipo_registro = 'titular';
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Enviando...';
 
     try {
-      let sink = document.getElementById('rsvpSink');
-      if (!sink) {
-        sink = document.createElement('iframe');
-        sink.name = 'rsvpSink';
-        sink.id = 'rsvpSink';
-        sink.style.display = 'none';
-        document.body.appendChild(sink);
+      postToGoogle(payload);
+
+      // Si hay acompañante, se añade también como registro independiente.
+      if (acompananteNorm) {
+        const payloadAcompanante = {
+          ...payload,
+          nombre_completo: payload.acompanante,
+          nombre_completo_normalizado: acompananteNorm,
+          acompanante: payload.nombre_completo,
+          acompanante_normalizado: nombreNorm,
+          asistentes: '1 persona',
+          tipo_registro: 'acompanante',
+          notas: payload.notas
+            ? payload.notas + ' | Acompañante de ' + payload.nombre_completo
+            : 'Acompañante de ' + payload.nombre_completo
+        };
+        postToGoogle(payloadAcompanante);
       }
-
-      const postForm = document.createElement('form');
-      postForm.method = 'POST';
-      postForm.action = GOOGLE_SCRIPT_URL;
-      postForm.target = 'rsvpSink';
-      postForm.style.display = 'none';
-
-      Object.entries(payload).forEach(([k, v]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = k;
-        input.value = String(v ?? '');
-        postForm.appendChild(input);
-      });
-
-      document.body.appendChild(postForm);
-      postForm.submit();
-      postForm.remove();
 
       alert('Gracias! Confirmacion enviada.');
       saveLocalRegisteredNames([nombreNorm, acompananteNorm]);
