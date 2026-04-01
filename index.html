@@ -1129,14 +1129,32 @@
     submitBtn.textContent = 'Enviando...';
 
     try {
-      const body = new URLSearchParams();
-      Object.entries(payload).forEach(([k, v]) => body.append(k, String(v ?? '')));
+      let sink = document.getElementById('rsvpSink');
+      if (!sink) {
+        sink = document.createElement('iframe');
+        sink.name = 'rsvpSink';
+        sink.id = 'rsvpSink';
+        sink.style.display = 'none';
+        document.body.appendChild(sink);
+      }
 
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body
+      const postForm = document.createElement('form');
+      postForm.method = 'POST';
+      postForm.action = GOOGLE_SCRIPT_URL;
+      postForm.target = 'rsvpSink';
+      postForm.style.display = 'none';
+
+      Object.entries(payload).forEach(([k, v]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = k;
+        input.value = String(v ?? '');
+        postForm.appendChild(input);
       });
+
+      document.body.appendChild(postForm);
+      postForm.submit();
+      postForm.remove();
 
       alert('Gracias! Confirmacion enviada.');
       saveLocalRegisteredNames([nombreNorm, acompananteNorm]);
