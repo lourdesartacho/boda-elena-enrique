@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime:wght@400;700&display=swap');
@@ -529,6 +530,128 @@
   /* Illustration helpers */
   .illus-cortijo { height: 200px; }
   .illus-iglesia { height: 260px; }
+
+  @media (max-width: 900px) {
+    .nav-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+    }
+
+    .nav-links {
+      width: 100%;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    section {
+      padding: 52px 18px;
+    }
+
+    #hero {
+      padding: 56px 18px 34px !important;
+    }
+
+    .hero-date {
+      font-size: 12px;
+      letter-spacing: 3px;
+    }
+
+    .hero-names {
+      font-size: 34px;
+      letter-spacing: 2px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+
+    .hero-photo-frame {
+      max-width: 300px;
+      padding: 10px;
+    }
+
+    .branch-left, .branch-right {
+      display: none;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 28px;
+    }
+
+    .timeline {
+      max-width: 100%;
+    }
+
+    .timeline-line {
+      left: 30px;
+      top: 28px;
+      bottom: 28px;
+    }
+
+    .timeline-item {
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .timeline-circle {
+      width: 60px;
+      height: 60px;
+    }
+
+    .timeline-circle svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .timeline-content {
+      padding-top: 10px;
+    }
+
+    .location-card {
+      padding: 16px;
+    }
+
+    .hotel-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .menu-opt {
+      font-size: 10px;
+      padding: 7px 12px;
+    }
+
+    .cuenta-box {
+      padding: 26px 18px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      max-width: 320px;
+      padding: 14px 20px;
+      letter-spacing: 2px;
+    }
+
+    .bus-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
 </style>
 
 <nav>
@@ -827,25 +950,25 @@
 
   <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:16px;color:var(--brown-mid);text-align:center;margin-bottom:40px;">Se solicita confirmaci&oacute;n antes del 1 de julio de 2026.</p>
 
-  <div class="rsvp-form">
+  <form class="rsvp-form" id="rsvpForm">
     <div class="form-row">
       <div class="field-group">
         <label class="field-label">Tu nombre completo</label>
-        <input type="text" class="field-input" placeholder="Nombre y apellidos">
+        <input type="text" class="field-input" name="nombre_completo" placeholder="Nombre y apellidos" required>
       </div>
       <div class="field-group">
         <label class="field-label">Nombre del acompa&ntilde;ante</label>
-        <input type="text" class="field-input" placeholder="Si asistes acompa&ntilde;ado/a">
+        <input type="text" class="field-input" name="acompanante" placeholder="Si asistes acompa&ntilde;ado/a">
       </div>
     </div>
 
     <div class="field-group">
       <label class="field-label">N&uacute;mero de asistentes</label>
-      <select class="field-select">
-        <option>1 persona</option>
-        <option>2 personas</option>
-        <option>3 personas</option>
-        <option>4 personas</option>
+      <select class="field-select" name="asistentes" required>
+        <option value="1 persona">1 persona</option>
+        <option value="2 personas">2 personas</option>
+        <option value="3 personas">3 personas</option>
+        <option value="4 personas">4 personas</option>
       </select>
     </div>
 
@@ -861,32 +984,32 @@
 
     <div class="field-group">
       <label class="field-label">Alergias o intolerancias</label>
-      <input type="text" class="field-input" placeholder="Si las hay...">
+      <input type="text" class="field-input" name="alergias" placeholder="Si las hay...">
     </div>
 
     <div class="field-group">
       <label class="field-label">Canci&oacute;n que no puede faltar</label>
-      <input type="text" class="field-input" placeholder="Tu canci&oacute;n para la pista">
+      <input type="text" class="field-input" name="cancion" placeholder="Tu canci&oacute;n para la pista">
     </div>
 
     <div class="field-group">
       <label class="field-label">&iquest;Utilizar&eacute;is el autob&uacute;s?</label>
-      <select class="field-select">
-        <option>S&iacute;, los dos trayectos</option>
-        <option>Solo la ida</option>
-        <option>Solo la vuelta (02:00 h)</option>
-        <option>Solo la vuelta (04:00 h)</option>
-        <option>No, vamos por nuestra cuenta</option>
+      <select class="field-select" name="autobus" required>
+        <option value="S&iacute;, los dos trayectos">S&iacute;, los dos trayectos</option>
+        <option value="Solo la ida">Solo la ida</option>
+        <option value="Solo la vuelta (02:00 h)">Solo la vuelta (02:00 h)</option>
+        <option value="Solo la vuelta (04:00 h)">Solo la vuelta (04:00 h)</option>
+        <option value="No, vamos por nuestra cuenta">No, vamos por nuestra cuenta</option>
       </select>
     </div>
 
     <div class="field-group">
       <label class="field-label">Notas para los novios</label>
-      <textarea class="field-textarea" placeholder="Cualquier cosa que quieras contarnos..."></textarea>
+      <textarea class="field-textarea" name="notas" placeholder="Cualquier cosa que quieras contarnos..."></textarea>
     </div>
 
-    <button class="submit-btn" onclick="alert('&iexcl;Gracias! Confirmaci&oacute;n enviada.')">Confirmar asistencia</button>
-  </div>
+    <button class="submit-btn" id="rsvpSubmitBtn" type="submit">Confirmar asistencia</button>
+  </form>
 </section>
 
 <!-- FOOTER -->
@@ -897,6 +1020,9 @@
 </footer>
 
 <script>
+  // Pega aqu&iacute; la URL del Web App de Google Apps Script.
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzF9GhMjZZP8sJoUsA6w048nnL6gTFoP_W-B27ZIjQ-BT_t16VqkuRgZbwWbvjtjEGzGA/exec';
+
   document.querySelectorAll('.menu-opt').forEach(opt => {
     opt.addEventListener('click', function() {
       document.querySelectorAll('.menu-opt').forEach(o => o.classList.remove('active'));
@@ -925,5 +1051,110 @@
       const target = document.querySelector(a.getAttribute('href'));
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
+  });
+
+  const rsvpForm = document.getElementById('rsvpForm');
+  const submitBtn = document.getElementById('rsvpSubmitBtn');
+  const RSVP_NAMES_KEY = 'rsvp_registered_names';
+
+  function normalizeName(value) {
+    return (value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function getLocalRegisteredNames() {
+    try {
+      const raw = localStorage.getItem(RSVP_NAMES_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveLocalRegisteredNames(names) {
+    const existing = new Set(getLocalRegisteredNames());
+    names.forEach(n => {
+      if (n) existing.add(n);
+    });
+    localStorage.setItem(RSVP_NAMES_KEY, JSON.stringify(Array.from(existing)));
+  }
+
+  rsvpForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    if (GOOGLE_SCRIPT_URL.includes('PEGA_AQUI')) {
+      alert('Falta configurar la URL de Google Apps Script en el HTML.');
+      return;
+    }
+
+    const activeMenu = document.querySelector('#menuOpts .menu-opt.active');
+    const formData = new FormData(rsvpForm);
+
+    const payload = {
+      fecha_envio: new Date().toISOString(),
+      nombre_completo: formData.get('nombre_completo') || '',
+      acompanante: formData.get('acompanante') || '',
+      asistentes: formData.get('asistentes') || '',
+      menu: activeMenu ? activeMenu.dataset.val : 'estandar',
+      alergias: formData.get('alergias') || '',
+      cancion: formData.get('cancion') || '',
+      autobus: formData.get('autobus') || '',
+      notas: formData.get('notas') || ''
+    };
+
+    const nombreNorm = normalizeName(payload.nombre_completo);
+    const acompananteNorm = normalizeName(payload.acompanante);
+
+    if (acompananteNorm && nombreNorm === acompananteNorm) {
+      alert('El nombre del asistente y el acompanante no pueden ser iguales.');
+      return;
+    }
+
+    const registeredNames = new Set(getLocalRegisteredNames());
+    if (registeredNames.has(nombreNorm) || (acompananteNorm && registeredNames.has(acompananteNorm))) {
+      alert('Este nombre ya figura como confirmado. Si necesitas cambiar datos, contacta con los novios.');
+      return;
+    }
+
+    payload.nombre_completo_normalizado = nombreNorm;
+    payload.acompanante_normalizado = acompananteNorm;
+    payload.action = 'register_rsvp';
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    try {
+      const resp = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await resp.json().catch(() => ({}));
+      if (!resp.ok || data.ok === false) {
+        if (data.duplicate) {
+          alert('Ya existe una confirmacion con ese nombre o acompanante.');
+          return;
+        }
+        throw new Error('Error en el envio');
+      }
+
+      alert('Gracias! Confirmacion enviada.');
+      saveLocalRegisteredNames([nombreNorm, acompananteNorm]);
+      rsvpForm.reset();
+      document.querySelectorAll('.menu-opt').forEach(o => o.classList.remove('active'));
+      const firstMenu = document.querySelector('#menuOpts .menu-opt');
+      if (firstMenu) firstMenu.classList.add('active');
+    } catch (err) {
+      alert('No se pudo enviar la confirmacion. Intentalo de nuevo.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Confirmar asistencia';
+    }
   });
 </script>
