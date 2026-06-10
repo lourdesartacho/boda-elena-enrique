@@ -1,179 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boda Elena y Enrique</title>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --cream: #f5f0e8;
-    --cream-dark: #ede7d9;
-    --brown: #3d1f0e;
-    --brown-mid: #6b3a1f;
-    --brown-light: #a0704a;
-    --brown-faint: rgba(61,31,14,0.08);
+    --white: #fffdf8;
+    --beige: #f2e7d6;
+    --beige-dark: #e1cfb8;
+    --brown: #3e2416;
+    --brown-mid: #6c4a35;
+    --brown-soft: rgba(62,36,22,0.12);
+    --eucalyptus: #74866b;
+    --eucalyptus-dark: #50634c;
+    --eucalyptus-soft: #dfe7d8;
   }
 
+  html { scroll-behavior: smooth; }
+
   body {
-    background: var(--cream);
-    color: var(--brown);
-    font-family: 'Cormorant Garamond', serif;
     min-height: 100vh;
+    background: var(--white);
+    color: var(--brown);
+    font-family: 'Special Elite', cursive;
   }
 
   nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--cream);
-    border-bottom: 0.5px solid rgba(61,31,14,0.2);
-    padding: 0;
+    background: rgba(255,253,248,0.95);
+    border-bottom: 1px solid var(--brown-soft);
   }
 
   .nav-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 14px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 14px 24px;
+    gap: 22px;
   }
 
   .nav-monogram {
-    font-family: 'IM Fell English', serif;
     font-size: 18px;
     color: var(--brown);
     letter-spacing: 2px;
+    white-space: nowrap;
   }
 
   .nav-links {
     display: flex;
-    gap: 28px;
+    gap: 24px;
     list-style: none;
   }
 
   .nav-links a {
-    font-family: 'Courier Prime', monospace;
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
     color: var(--brown-mid);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     text-decoration: none;
-    transition: color 0.2s;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--brown); }
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--brown);
+    border-bottom-color: var(--brown);
+  }
 
   section {
+    padding: 76px 32px;
+  }
+
+  section > * {
     max-width: 860px;
-    margin: 0 auto;
-    padding: 72px 32px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .section-divider {
-    width: 1px;
-    height: 48px;
-    background: rgba(61,31,14,0.25);
-    margin: 0 auto;
-  }
+  #hero { background: var(--white); }
+  #programa { background: var(--eucalyptus-soft); }
+  #estancia { background: var(--beige); }
+  #antequera { background: #fbf7ee; }
+  #autobuses { background: #eadcc9; }
+  #cuenta { background: var(--white); }
+  #confirmacion { background: var(--eucalyptus-soft); }
 
-  /* HERO */
   #hero {
+    min-height: calc(100vh - 50px);
+    padding-top: 68px;
+    padding-bottom: 54px;
     text-align: center;
-    padding: 80px 32px 60px;
     position: relative;
+    overflow: hidden;
   }
+
+  .branch-left,
+  .branch-right {
+    position: absolute;
+    top: 46px;
+    width: min(26vw, 180px);
+    height: auto;
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  .branch-left { left: 3vw; }
+  .branch-right { right: 3vw; }
 
   .hero-date {
-    font-family: 'Courier Prime', monospace;
+    margin-bottom: 26px;
+    color: var(--eucalyptus-dark);
     font-size: 13px;
     letter-spacing: 4px;
-    color: var(--brown-mid);
-    margin-bottom: 16px;
   }
 
   .hero-names {
-    font-family: 'Courier Prime', monospace;
-    font-weight: 700;
-    font-size: 42px;
-    letter-spacing: 3px;
+    margin-bottom: 22px;
     color: var(--brown);
-    line-height: 1.1;
-    margin-bottom: 20px;
+    font-size: clamp(38px, 6vw, 60px);
+    line-height: 1.35;
+    letter-spacing: 1px;
+  }
+
+  .hero-amp {
+    display: block;
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.25;
   }
 
   .hero-sub {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 20px;
-    color: var(--brown-mid);
-    margin-bottom: 40px;
-  }
-
-  .hero-illustration {
-    width: 100%;
     max-width: 680px;
-    margin: 0 auto 40px;
-    display: block;
-    opacity: 0.9;
+    margin-bottom: 32px;
+    color: var(--brown-mid);
+    font-size: 17px;
+    line-height: 1.75;
   }
 
   .hero-photo-frame {
-    border: 0.5px solid rgba(61,31,14,0.15);
-    padding: 14px;
-    max-width: 360px;
-    margin: 0 auto;
-    background: var(--cream);
+    max-width: 760px;
+    padding: 12px;
+    background: var(--white);
+    border: 1px solid rgba(62,36,22,0.16);
   }
 
   .hero-photo {
-    width: 100%;
     display: block;
-    border: 0.5px solid rgba(61,31,14,0.15);
-    filter: grayscale(100%) contrast(1.03) brightness(1.05);
-    background: transparent;
-    mix-blend-mode: multiply;
+    width: 100%;
+    border: 1px solid rgba(62,36,22,0.12);
+    filter: sepia(10%) contrast(1.03) brightness(1.08);
   }
 
-  /* Branch decoration */
-  .branch-left, .branch-right {
-    position: absolute;
-    top: 72px;
-    opacity: 0.55;
-    width: 110px;
-    height: auto;
-    pointer-events: none;
-  }
-  .branch-left { left: 20px; }
-  .branch-right { right: 20px; }
-
-  /* SECTION HEADERS */
   .section-label {
-    font-family: 'Courier Prime', monospace;
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    text-align: center;
     margin-bottom: 10px;
+    color: var(--eucalyptus-dark);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   .section-title {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 32px;
+    margin-bottom: 36px;
     color: var(--brown);
+    font-size: 32px;
+    line-height: 1.25;
     text-align: center;
-    margin-bottom: 40px;
   }
 
-  /* TIMELINE */
+  .section-copy {
+    max-width: 660px;
+    margin-bottom: 32px;
+    color: var(--brown-mid);
+    font-size: 16px;
+    line-height: 1.7;
+    text-align: center;
+  }
+
   .timeline {
     position: relative;
-    padding-left: 0;
-    max-width: 480px;
-    margin: 0 auto;
+    max-width: 540px;
   }
 
   .timeline-line {
@@ -181,355 +197,277 @@
     left: 36px;
     top: 36px;
     bottom: 36px;
-    width: 0.5px;
-    background: rgba(61,31,14,0.25);
+    width: 1px;
+    background: rgba(62,36,22,0.22);
   }
 
   .timeline-item {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    margin-bottom: 36px;
+    margin-bottom: 34px;
   }
 
+  .timeline-item:last-child { margin-bottom: 0; }
+
   .timeline-circle {
+    position: relative;
+    z-index: 1;
     width: 72px;
     height: 72px;
+    border: 1px solid rgba(62,36,22,0.35);
     border-radius: 50%;
-    border: 1px solid rgba(61,31,14,0.35);
+    background: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    background: var(--cream);
-    position: relative;
-    z-index: 1;
   }
 
   .timeline-circle svg { width: 32px; height: 32px; }
 
-  .timeline-content { padding-top: 14px; }
+  .timeline-content { padding-top: 12px; }
 
   .timeline-time {
-    font-family: 'Courier Prime', monospace;
+    margin-bottom: 4px;
+    color: var(--eucalyptus-dark);
     font-size: 13px;
     letter-spacing: 1px;
-    color: var(--brown-light);
-    margin-bottom: 2px;
   }
 
   .timeline-place {
-    font-family: 'Courier Prime', monospace;
-    font-weight: 700;
-    font-size: 15px;
+    margin-bottom: 5px;
     color: var(--brown);
-  }
-
-  /* LOCATION CARDS */
-  .location-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 620px;
-    margin: 0 auto;
-  }
-
-  .location-card {
-    border: 0.5px solid rgba(61,31,14,0.2);
-    padding: 24px;
-    background: var(--cream);
-    position: relative;
-  }
-
-  .location-card::before {
-    content: '';
-    position: absolute;
-    top: 6px; left: 6px;
-    right: -6px; bottom: -6px;
-    border: 0.5px solid rgba(61,31,14,0.1);
-    pointer-events: none;
-  }
-
-  .location-name {
-    font-family: 'Courier Prime', monospace;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: var(--brown);
-    margin-bottom: 6px;
-  }
-
-  .location-address {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
     font-size: 15px;
+  }
+
+  .timeline-note {
+    margin-bottom: 10px;
     color: var(--brown-mid);
+    font-size: 14px;
     line-height: 1.5;
-    margin-bottom: 14px;
-  }
-
-  .location-illustration {
-    width: 100%;
-    height: 180px;
-    object-fit: contain;
-    display: block;
-    margin-bottom: 14px;
-    border: 0.5px solid rgba(61,31,14,0.15);
-    filter: grayscale(100%) contrast(1.02) brightness(1.06);
-    background: rgba(61,31,14,0.03);
   }
 
   .map-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: 'Courier Prime', monospace;
+    padding: 8px 14px;
+    border: 1px solid rgba(62,36,22,0.3);
+    background: transparent;
+    color: var(--brown-mid);
+    font-family: 'Special Elite', cursive;
     font-size: 10px;
     letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--brown-mid);
-    border: 0.5px solid rgba(61,31,14,0.3);
-    padding: 7px 14px;
+    line-height: 1;
     text-decoration: none;
-    transition: all 0.2s;
-    background: transparent;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
     cursor: pointer;
   }
 
   .map-btn:hover {
-    background: var(--brown-faint);
+    background: rgba(62,36,22,0.08);
     color: var(--brown);
   }
 
-  /* HOTEL CARDS */
-  .hotel-list {
+  .item-list {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
 
-  .hotel-card {
+  .list-heading {
+    margin: 36px auto 14px;
+    color: var(--eucalyptus-dark);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .list-heading:first-of-type { margin-top: 0; }
+
+  .info-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 0.5px solid rgba(61,31,14,0.15);
-    padding-bottom: 16px;
     gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(62,36,22,0.16);
   }
 
-  .hotel-info { flex: 1; }
-
-  .hotel-name {
-    font-family: 'Courier Prime', monospace;
-    font-weight: 700;
-    font-size: 14px;
+  .info-name {
+    margin-bottom: 4px;
     color: var(--brown);
-    margin-bottom: 3px;
+    font-size: 15px;
+    line-height: 1.35;
   }
 
-  .hotel-desc {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 14px;
+  .info-desc {
     color: var(--brown-mid);
+    font-size: 14px;
+    line-height: 1.5;
   }
 
-  /* BUSES */
   .bus-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: 'Courier Prime', monospace;
     font-size: 13px;
   }
 
   .bus-table th {
-    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(62,36,22,0.22);
+    color: var(--eucalyptus-dark);
     font-size: 10px;
     letter-spacing: 2px;
+    text-align: left;
     text-transform: uppercase;
-    color: var(--brown-light);
-    padding: 8px 12px;
-    border-bottom: 0.5px solid rgba(61,31,14,0.2);
   }
 
   .bus-table td {
-    padding: 12px;
-    border-bottom: 0.5px solid rgba(61,31,14,0.1);
+    padding: 13px 12px;
+    border-bottom: 1px solid rgba(62,36,22,0.12);
     color: var(--brown);
+    line-height: 1.4;
   }
 
-  /* CUENTA */
   .cuenta-box {
-    text-align: center;
-    border: 0.5px solid rgba(61,31,14,0.2);
-    padding: 40px 48px;
+    max-width: 540px;
+    padding: 40px 44px;
+    border: 1px solid rgba(62,36,22,0.22);
+    background: #fffaf1;
     position: relative;
-    max-width: 520px;
-    margin: 0 auto;
+    text-align: center;
   }
 
   .cuenta-box::before {
     content: '';
     position: absolute;
-    top: 6px; left: 6px;
-    right: -6px; bottom: -6px;
-    border: 0.5px solid rgba(61,31,14,0.1);
+    top: 7px;
+    left: 7px;
+    right: -7px;
+    bottom: -7px;
+    border: 1px solid rgba(62,36,22,0.1);
     pointer-events: none;
   }
 
   .cuenta-text {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: var(--brown-mid);
-    line-height: 1.7;
     margin-bottom: 24px;
+    color: var(--brown-mid);
+    font-size: 17px;
+    line-height: 1.7;
   }
 
   .cuenta-iban {
-    font-family: 'Courier Prime', monospace;
+    color: var(--brown);
     font-size: 16px;
     letter-spacing: 3px;
-    color: var(--brown);
-    font-weight: 700;
   }
 
-  /* FORM */
   .rsvp-form {
-    max-width: 520px;
-    margin: 0 auto;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  .field-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
 
   .field-label {
-    font-family: 'Courier Prime', monospace;
+    color: var(--eucalyptus-dark);
     font-size: 10px;
-    letter-spacing: 2.5px;
+    letter-spacing: 2.4px;
     text-transform: uppercase;
-    color: var(--brown-light);
   }
 
-  .field-input {
-    background: transparent;
-    border: none;
-    border-bottom: 0.5px solid rgba(61,31,14,0.3);
-    padding: 10px 2px;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--brown);
-    outline: none;
-    transition: border-color 0.2s;
+  .field-input,
+  .field-select,
+  .field-textarea {
     width: 100%;
+    border-radius: 0;
+    background: transparent;
+    color: var(--brown);
+    font-family: 'Special Elite', cursive;
+    font-size: 15px;
+    outline: none;
   }
 
-  .field-input:focus { border-bottom-color: var(--brown); }
+  .field-input,
+  .field-select {
+    padding: 10px 2px;
+    border: none;
+    border-bottom: 1px solid rgba(62,36,22,0.34);
+  }
 
   .field-select {
-    background: var(--cream);
-    border: none;
-    border-bottom: 0.5px solid rgba(61,31,14,0.3);
-    padding: 10px 2px;
-    font-family: 'Courier Prime', monospace;
-    font-size: 13px;
-    color: var(--brown);
-    outline: none;
-    width: 100%;
-    appearance: none;
+    background: transparent;
     cursor: pointer;
   }
 
   .field-textarea {
-    background: transparent;
-    border: 0.5px solid rgba(61,31,14,0.2);
+    min-height: 92px;
     padding: 14px;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--brown);
-    outline: none;
+    border: 1px solid rgba(62,36,22,0.24);
     resize: vertical;
-    min-height: 90px;
-    width: 100%;
-    transition: border-color 0.2s;
   }
 
-  .field-textarea:focus { border-color: rgba(61,31,14,0.4); }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-  .menu-options { display: flex; gap: 12px; flex-wrap: wrap; }
-
-  .menu-opt {
-    font-family: 'Courier Prime', monospace;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border: 0.5px solid rgba(61,31,14,0.3);
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: var(--brown-mid);
-    background: transparent;
-    user-select: none;
-  }
-
-  .menu-opt.active {
-    background: var(--brown);
-    color: var(--cream);
+  .field-input:focus,
+  .field-select:focus,
+  .field-textarea:focus {
     border-color: var(--brown);
   }
 
   .submit-btn {
-    font-family: 'Courier Prime', monospace;
+    align-self: center;
+    margin-top: 8px;
+    padding: 16px 38px;
+    border: 1px solid var(--brown);
+    background: transparent;
+    color: var(--brown);
+    font-family: 'Special Elite', cursive;
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    border: 1px solid var(--brown);
-    padding: 16px 40px;
-    background: transparent;
-    color: var(--brown);
     cursor: pointer;
-    transition: all 0.2s;
-    align-self: center;
-    margin-top: 8px;
+    transition: background 0.2s, color 0.2s;
   }
 
-  .submit-btn:hover { background: var(--brown); color: var(--cream); }
+  .submit-btn:hover {
+    background: var(--brown);
+    color: var(--white);
+  }
 
-  /* FOOTER */
   footer {
+    padding: 40px 32px 56px;
+    border-top: 1px solid rgba(62,36,22,0.14);
+    background: var(--white);
     text-align: center;
-    padding: 40px 32px 60px;
-    border-top: 0.5px solid rgba(61,31,14,0.15);
   }
 
   .footer-monogram {
-    font-family: 'IM Fell English', serif;
+    margin-bottom: 8px;
+    color: var(--brown);
     font-size: 22px;
     letter-spacing: 4px;
-    color: var(--brown);
-    margin-bottom: 8px;
   }
 
   .footer-sub {
-    font-family: 'Courier Prime', monospace;
+    color: var(--eucalyptus-dark);
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--brown-light);
   }
-
-  /* ACTIVE NAV */
-  .nav-links a.active { color: var(--brown); border-bottom: 0.5px solid var(--brown); }
-
-  /* Illustration helpers */
-  .illus-cortijo { height: 200px; }
-  .illus-iglesia { height: 260px; }
 
   @media (max-width: 900px) {
     .nav-inner {
@@ -548,45 +486,37 @@
       scrollbar-width: thin;
     }
 
-    section {
-      padding: 52px 18px;
-    }
+    section { padding: 56px 18px; }
 
     #hero {
-      padding: 56px 18px 34px !important;
+      min-height: auto;
+      padding-top: 50px;
+      padding-bottom: 40px;
+    }
+
+    .branch-left,
+    .branch-right {
+      display: none;
     }
 
     .hero-date {
+      margin-bottom: 20px;
       font-size: 12px;
       letter-spacing: 3px;
     }
 
-    .hero-names {
-      font-size: 34px;
-      letter-spacing: 2px;
-    }
-
     .hero-sub {
-      font-size: 18px;
-      margin-bottom: 28px;
+      font-size: 15px;
+      margin-bottom: 26px;
     }
 
     .hero-photo-frame {
-      max-width: 300px;
-      padding: 10px;
-    }
-
-    .branch-left, .branch-right {
-      display: none;
+      padding: 8px;
     }
 
     .section-title {
       font-size: 28px;
       margin-bottom: 28px;
-    }
-
-    .timeline {
-      max-width: 100%;
     }
 
     .timeline-line {
@@ -611,14 +541,10 @@
     }
 
     .timeline-content {
-      padding-top: 10px;
+      padding-top: 8px;
     }
 
-    .location-card {
-      padding: 16px;
-    }
-
-    .hotel-card {
+    .info-card {
       flex-direction: column;
       align-items: flex-start;
       gap: 10px;
@@ -629,13 +555,15 @@
       gap: 14px;
     }
 
-    .menu-opt {
-      font-size: 10px;
-      padding: 7px 12px;
+    .bus-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
     }
 
     .cuenta-box {
-      padding: 26px 18px;
+      padding: 28px 18px;
     }
 
     .submit-btn {
@@ -644,23 +572,18 @@
       padding: 14px 20px;
       letter-spacing: 2px;
     }
-
-    .bus-table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
   }
 </style>
+</head>
 
+<body>
 <nav>
   <div class="nav-inner">
     <span class="nav-monogram">E & E</span>
     <ul class="nav-links">
       <li><a href="#programa">Programa</a></li>
-      <li><a href="#localizacion">Lugares</a></li>
-      <li><a href="#recomendaciones">Recomendaciones</a></li>
+      <li><a href="#estancia">Estancia</a></li>
+      <li><a href="#antequera">Conoce Antequera</a></li>
       <li><a href="#autobuses">Autobuses</a></li>
       <li><a href="#cuenta">Cuenta</a></li>
       <li><a href="#confirmacion">Confirmaci&oacute;n</a></li>
@@ -668,28 +591,19 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero" style="text-align:center; position:relative; padding: 80px 32px 48px;">
-
+<section id="hero">
   <img class="branch-left" src="branch-left.png" alt="" aria-hidden="true">
   <img class="branch-right" src="branch-right.png" alt="" aria-hidden="true">
 
   <p class="hero-date">12 | 09 | 26</p>
-  <h1 class="hero-names">Elena & Enrique</h1>
-  <p class="hero-sub">tienen el gusto de invitaros a su boda</p>
-
-  <svg viewBox="0 0 320 60" width="220" style="display:block;margin:0 auto 40px;opacity:0.6" fill="none">
-    <path d="M0 30 Q80 10 160 30 Q240 50 320 30" stroke="#6b3a1f" stroke-width="0.8"/>
-  </svg>
+  <h1 class="hero-names">Elena<span class="hero-amp">&amp;</span>Enrique</h1>
+  <p class="hero-sub">&iexcl;Bienvenidos a nuestra boda! Estamos muy felices de poder compartir con vosotros este momento tan especial. Aqu&iacute; os dejamos todos los detalles del evento.</p>
 
   <div class="hero-photo-frame">
-    <img class="hero-photo" src="ilustracion_pareja-transparente.png" alt="Ilustraci&oacute;n de Elena y Enrique">
+    <img class="hero-photo" src="cortijo-ilustracion-ajustada.png" alt="Ilustraci&oacute;n de Jardines del Cortijuelo">
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- PROGRAMA / TIMELINE -->
 <section id="programa">
   <p class="section-label">Programa</p>
   <h2 class="section-title">El d&iacute;a de nuestra boda</h2>
@@ -699,7 +613,7 @@
 
     <div class="timeline-item">
       <div class="timeline-circle">
-        <svg viewBox="0 0 32 32" fill="none" stroke="#6b3a1f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#6c4a35" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 24H24"/>
           <path d="M10 24V14L16 10L22 14V24"/>
           <path d="M14 24V19H18V24"/>
@@ -710,13 +624,14 @@
       <div class="timeline-content">
         <p class="timeline-time">18:30</p>
         <p class="timeline-place">Iglesia del Carmen</p>
-        <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:14px;color:var(--brown-light);margin-top:3px;">Ceremonia religiosa &middot; Antequera</p>
+        <p class="timeline-note">Ceremonia religiosa &middot; Antequera</p>
+        <a class="map-btn" href="https://maps.google.com/?q=Iglesia+del+Carmen+Antequera" target="_blank" rel="noopener noreferrer">Ver mapa</a>
       </div>
     </div>
 
     <div class="timeline-item">
       <div class="timeline-circle">
-        <svg viewBox="0 0 32 32" fill="none" stroke="#6b3a1f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#6c4a35" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 10H24L17 17H15L8 10Z"/>
           <path d="M16 17V22"/>
           <path d="M13.5 22H18.5"/>
@@ -727,13 +642,14 @@
       <div class="timeline-content">
         <p class="timeline-time">20:30</p>
         <p class="timeline-place">Jardines del Cortijuelo</p>
-        <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:14px;color:var(--brown-light);margin-top:3px;">C&oacute;ctel de bienvenida</p>
+        <p class="timeline-note">C&oacute;ctel de bienvenida</p>
+        <a class="map-btn" href="https://maps.google.com/?q=Jardines+del+Cortijuelo+Antequera" target="_blank" rel="noopener noreferrer">Ver mapa</a>
       </div>
     </div>
 
     <div class="timeline-item">
       <div class="timeline-circle">
-        <svg viewBox="0 0 32 32" fill="none" stroke="#6b3a1f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#6c4a35" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="17" cy="16" r="5.5"/>
           <circle cx="17" cy="16" r="2.8"/>
           <path d="M8 9V13"/>
@@ -747,154 +663,107 @@
       <div class="timeline-content">
         <p class="timeline-time">21:30</p>
         <p class="timeline-place">Cena</p>
-        <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:14px;color:var(--brown-light);margin-top:3px;">Jardines del Cortijuelo</p>
+        <p class="timeline-note">Jardines del Cortijuelo</p>
       </div>
     </div>
 
     <div class="timeline-item">
       <div class="timeline-circle">
-        <svg viewBox="0 0 32 32" fill="#6b3a1f" stroke="none">
+        <svg viewBox="0 0 32 32" fill="#6c4a35" stroke="none" aria-hidden="true">
           <path d="M12 10.5V20.8A3 3 0 1 1 10.6 18.3V12.3L22 10V19.1A3 3 0 1 1 20.6 16.6V11.8L12 13.6V10.5Z"/>
         </svg>
       </div>
       <div class="timeline-content">
         <p class="timeline-time">00:00</p>
         <p class="timeline-place">Fiesta</p>
-        <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:14px;color:var(--brown-light);margin-top:3px;">&iexcl;A bailar!</p>
+        <p class="timeline-note">&iexcl;A bailar!</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<section id="estancia">
+  <p class="section-label">Estancia</p>
+  <h2 class="section-title">Hoteles</h2>
 
-<!-- LOCALIZACION -->
-<section id="localizacion">
-  <p class="section-label">D&oacute;nde celebramos</p>
-  <h2 class="section-title">Localizaciones</h2>
-
-  <div class="location-grid">
-    <div class="location-card">
-      <img class="location-illustration illus-iglesia" src="iglesia_ilustracion.png" alt="Ilustraci&oacute;n de la Iglesia del Carmen">
-      <p class="location-name">Iglesia del Carmen</p>
-      <p class="location-address">Calle Carmen, s/n<br>29200 Antequera, M&aacute;laga</p>
-      <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:13px;color:var(--brown-light);margin-bottom:14px;">Ceremonia religiosa &middot; 18:30 h</p>
-      <a class="map-btn" href="https://maps.google.com/?q=Iglesia+del+Carmen+Antequera" target="_blank">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="5" cy="4" r="2.5"/>
-          <path d="M5 9 C5 9 2 6.5 2 4 A3 3 0 0 1 8 4 C8 6.5 5 9 5 9Z"/>
-        </svg>
-        Ver en mapa
-      </a>
+  <div class="item-list">
+    <div class="info-card">
+      <div>
+        <p class="info-name">Hotel Antequera Golf</p>
+        <p class="info-desc">A 10 min del cortijo &middot; Traslados disponibles</p>
+      </div>
+      <a class="map-btn" href="https://maps.google.com/?q=Hotel+Antequera+Hills+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
     </div>
-
-    <div class="location-card">
-      <img class="location-illustration illus-cortijo" src="cortijo-ilustracion-ajustada.png" alt="Ilustraci&oacute;n de Jardines del Cortijuelo">
-      <p class="location-name">Jardines del Cortijuelo</p>
-      <p class="location-address">Ctra. Antequera&ndash;Archidona<br>29200 Antequera, M&aacute;laga</p>
-      <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:13px;color:var(--brown-light);margin-bottom:14px;">C&oacute;ctel, cena y fiesta &middot; 20:30 h</p>
-      <a class="map-btn" href="https://maps.google.com/?q=Jardines+del+Cortijuelo+Antequera" target="_blank">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="5" cy="4" r="2.5"/>
-          <path d="M5 9 C5 9 2 6.5 2 4 A3 3 0 0 1 8 4 C8 6.5 5 9 5 9Z"/>
-        </svg>
-        Ver en mapa
-      </a>
+    <div class="info-card">
+      <div>
+        <p class="info-name">Parador de Antequera</p>
+        <p class="info-desc">Centro hist&oacute;rico &middot; A 15 min en coche</p>
+      </div>
+      <a class="map-btn" href="https://maps.google.com/?q=Parador+de+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
+    </div>
+    <div class="info-card">
+      <div>
+        <p class="info-name">Hotel Coso Viejo</p>
+        <p class="info-desc">Casco antiguo &middot; Encanto local</p>
+      </div>
+      <a class="map-btn" href="https://maps.google.com/?q=Hotel+Coso+Viejo+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- RECOMENDACIONES -->
-<section id="recomendaciones">
+<section id="antequera">
   <p class="section-label">Para el fin de semana</p>
-  <h2 class="section-title">Recomendaciones</h2>
+  <h2 class="section-title">Conoce Antequera</h2>
 
-  <p style="font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--brown-light);margin-bottom:14px;">Hoteles</p>
-  <div class="hotel-list">
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">Hotel Antequera Golf</p>
-        <p class="hotel-desc">A 10 min del cortijo &middot; Traslados disponibles</p>
+  <p class="list-heading">Restaurantes</p>
+  <div class="item-list">
+    <div class="info-card">
+      <div>
+        <p class="info-name">La Mariquilla</p>
+        <p class="info-desc">Cocina casera y ambiente andaluz</p>
       </div>
-      <a class="map-btn" href="https://maps.google.com/?q=Hotel+Antequera+Hills+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
+      <a class="map-btn" href="https://maps.google.com/?q=La+Mariquilla+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
     </div>
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">Parador de Antequera</p>
-        <p class="hotel-desc">Centro hist&oacute;rico &middot; A 15 min en coche</p>
+    <div class="info-card">
+      <div>
+        <p class="info-name">A Mi Manera</p>
+        <p class="info-desc">Restaurante en Antequera</p>
       </div>
-      <a class="map-btn" href="https://maps.google.com/?q=Parador+de+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
-    </div>
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">Hotel Coso Viejo</p>
-        <p class="hotel-desc">Casco antiguo &middot; Encanto local</p>
-      </div>
-      <a class="map-btn" href="https://maps.google.com/?q=Hotel+Coso+Viejo+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
+      <a class="map-btn" href="https://maps.google.com/?q=A+Mi+Manera+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
     </div>
   </div>
 
-  <p style="font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--brown-light);margin:34px 0 14px;">Restaurantes</p>
-  <div class="hotel-list">
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">La Mariquilla</p>
-        <p class="hotel-desc">Cocina casera y ambiente andaluz</p>
+  <p class="list-heading">Sitios de inter&eacute;s</p>
+  <div class="item-list">
+    <div class="info-card">
+      <div>
+        <p class="info-name">El Torcal de Antequera</p>
+        <p class="info-desc">Paisaje k&aacute;rstico y rutas para pasear</p>
       </div>
-      <a class="map-btn" href="https://maps.google.com/?q=La+Mariquilla+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
+      <a class="map-btn" href="https://maps.google.com/?q=El+Torcal+de+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
     </div>
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">La F&aacute;brique</p>
-        <p class="hotel-desc">Opciones modernas para comer y cenar</p>
+    <div class="info-card">
+      <div>
+        <p class="info-name">Real Colegiata de Santa Mar&iacute;a</p>
+        <p class="info-desc">Uno de los monumentos m&aacute;s bonitos del centro hist&oacute;rico</p>
       </div>
-      <a class="map-btn" href="https://maps.google.com/?q=La+Fabrique+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
+      <a class="map-btn" href="https://maps.google.com/?q=Real+Colegiata+de+Santa+Maria+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
     </div>
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">Mes&oacute;n Adarve</p>
-        <p class="hotel-desc">Mediterr&aacute;neo y espa&ntilde;ol &middot; Muy cerca del casco hist&oacute;rico</p>
+    <div class="info-card">
+      <div>
+        <p class="info-name">D&oacute;lmenes de Antequera</p>
+        <p class="info-desc">Conjunto arqueol&oacute;gico Patrimonio Mundial UNESCO</p>
       </div>
-      <a class="map-btn" href="https://maps.google.com/?q=Mes%C3%B3n+Adarve+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
-    </div>
-  </div>
-
-  <p style="font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--brown-light);margin:34px 0 14px;">Conoce Antequera</p>
-  <div class="hotel-list">
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">El Torcal de Antequera</p>
-        <p class="hotel-desc">Paisaje k&aacute;rstico &uacute;nico y rutas sencillas para pasear</p>
-      </div>
-      <a class="map-btn" href="https://maps.google.com/?q=El+Torcal+de+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
-    </div>
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">Conjunto Arqueol&oacute;gico D&oacute;lmenes de Antequera</p>
-        <p class="hotel-desc">Patrimonio Mundial UNESCO &middot; Menga, Viera y El Romeral</p>
-      </div>
-      <a class="map-btn" href="https://maps.google.com/?q=D%C3%B3lmenes+de+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
-    </div>
-    <div class="hotel-card">
-      <div class="hotel-info">
-        <p class="hotel-name">Iglesias destacables</p>
-        <p class="hotel-desc">Real Colegiata de Santa Mar&iacute;a y San Sebasti&aacute;n</p>
-      </div>
-      <a class="map-btn" href="https://maps.google.com/?q=Real+Colegiata+de+Santa+Mar%C3%ADa+Antequera" target="_blank" rel="noopener noreferrer" style="white-space:nowrap">Ver ubicaci&oacute;n</a>
+      <a class="map-btn" href="https://maps.google.com/?q=Dolmenes+de+Antequera" target="_blank" rel="noopener noreferrer">Ver ubicaci&oacute;n</a>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- AUTOBUSES -->
 <section id="autobuses">
   <p class="section-label">Transporte</p>
   <h2 class="section-title">Autobuses</h2>
 
-  <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:var(--brown-mid);text-align:center;margin-bottom:32px;line-height:1.6;">Hemos organizado autob&uacute;s de ida y vuelta para facilitar el traslado. Os pedimos que confirm&eacute;is si lo utilizar&eacute;is en el formulario de asistencia.</p>
+  <p class="section-copy">Hemos organizado autob&uacute;s de ida y vuelta para facilitar el traslado. Os pedimos que confirm&eacute;is si lo utilizar&eacute;is en el formulario de asistencia.</p>
 
   <table class="bus-table">
     <thead>
@@ -902,35 +771,32 @@
         <th>Trayecto</th>
         <th>Salida</th>
         <th>Hora</th>
-        <th>Punto de recogida</th>
+        <th>Punto de dejada</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>Ida</td>
         <td>Antequera centro</td>
-        <td>18:00 h</td>
-        <td>Por confirmar</td>
+        <td>19:30 - 20:00 h</td>
+        <td>Jardines del Cortijuelo</td>
       </tr>
       <tr>
         <td>Vuelta</td>
-        <td>Cortijuelo</td>
-        <td>02:00 h</td>
-        <td>Puerta del cortijo</td>
+        <td>Jardines del Cortijuelo</td>
+        <td>02:30 h</td>
+        <td>A&uacute;n por determinar</td>
       </tr>
       <tr>
         <td>Vuelta</td>
-        <td>Cortijuelo</td>
-        <td>04:00 h</td>
-        <td>Puerta del cortijo</td>
+        <td>Jardines del Cortijuelo</td>
+        <td>06:00 h</td>
+        <td>A&uacute;n por determinar</td>
       </tr>
     </tbody>
   </table>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- CUENTA -->
 <section id="cuenta">
   <p class="section-label">Lista de boda</p>
   <h2 class="section-title">Un detalle con nosotros</h2>
@@ -941,94 +807,61 @@
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- CONFIRMACION -->
 <section id="confirmacion">
   <p class="section-label">Confirmaci&oacute;n</p>
   <h2 class="section-title">&iquest;Ven&iacute;s a la boda?</h2>
 
-  <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:16px;color:var(--brown-mid);text-align:center;margin-bottom:40px;">Se solicita confirmaci&oacute;n antes del 1 de julio de 2026.</p>
+  <p class="section-copy">Se solicita confirmaci&oacute;n antes del 1 de julio de 2026.</p>
 
   <form class="rsvp-form" id="rsvpForm">
     <div class="form-row">
       <div class="field-group">
-        <label class="field-label">Tu nombre completo</label>
-        <input type="text" class="field-input" name="nombre_completo" placeholder="Nombre y apellidos" required>
+        <label class="field-label" for="nombre_completo">Tu nombre completo</label>
+        <input id="nombre_completo" type="text" class="field-input" name="nombre_completo" placeholder="Nombre y apellidos" required>
       </div>
       <div class="field-group">
-        <label class="field-label">Nombre del acompa&ntilde;ante</label>
-        <input type="text" class="field-input" name="acompanante" placeholder="Si asistes acompa&ntilde;ado/a">
+        <label class="field-label" for="acompanante">Nombre del acompa&ntilde;ante</label>
+        <input id="acompanante" type="text" class="field-input" name="acompanante" placeholder="Si asistes acompa&ntilde;ado/a">
       </div>
     </div>
 
     <div class="field-group">
-      <label class="field-label">N&uacute;mero de asistentes</label>
-      <select class="field-select" name="asistentes" required>
-        <option value="1 persona">1 persona</option>
-        <option value="2 personas">2 personas</option>
-        <option value="3 personas">3 personas</option>
-        <option value="4 personas">4 personas</option>
-      </select>
+      <label class="field-label" for="alergias">Alergias o intolerancias</label>
+      <input id="alergias" type="text" class="field-input" name="alergias" placeholder="Si las hay...">
     </div>
 
     <div class="field-group">
-      <label class="field-label">Men&uacute;</label>
-      <div class="menu-options" id="menuOpts">
-        <div class="menu-opt active" data-val="estandar">Est&aacute;ndar</div>
-        <div class="menu-opt" data-val="vegetariano">Vegetariano</div>
-        <div class="menu-opt" data-val="vegano">Vegano</div>
-        <div class="menu-opt" data-val="sin-gluten">Sin gluten</div>
-      </div>
+      <label class="field-label" for="cancion">Canci&oacute;n que no puede faltar</label>
+      <input id="cancion" type="text" class="field-input" name="cancion" placeholder="Tu canci&oacute;n para la pista">
     </div>
 
     <div class="field-group">
-      <label class="field-label">Alergias o intolerancias</label>
-      <input type="text" class="field-input" name="alergias" placeholder="Si las hay...">
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">Canci&oacute;n que no puede faltar</label>
-      <input type="text" class="field-input" name="cancion" placeholder="Tu canci&oacute;n para la pista">
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">&iquest;Utilizar&eacute;is el autob&uacute;s?</label>
-      <select class="field-select" name="autobus" required>
-        <option value="S&iacute;, los dos trayectos">S&iacute;, los dos trayectos</option>
-        <option value="Solo la ida">Solo la ida</option>
-        <option value="Solo la vuelta (02:00 h)">Solo la vuelta (02:00 h)</option>
-        <option value="Solo la vuelta (04:00 h)">Solo la vuelta (04:00 h)</option>
+      <label class="field-label" for="autobus">&iquest;Utilizar&eacute;is el autob&uacute;s?</label>
+      <select id="autobus" class="field-select" name="autobus" required>
+        <option value="Solo ida">Solo ida</option>
+        <option value="Ida y vuelta a las 2:30">Ida y vuelta a las 2:30</option>
+        <option value="Ida y vuelta a las 6:00">Ida y vuelta a las 6:00</option>
         <option value="No, vamos por nuestra cuenta">No, vamos por nuestra cuenta</option>
       </select>
     </div>
 
     <div class="field-group">
-      <label class="field-label">Notas para los novios</label>
-      <textarea class="field-textarea" name="notas" placeholder="Cualquier cosa que quieras contarnos..."></textarea>
+      <label class="field-label" for="notas">Notas para los novios</label>
+      <textarea id="notas" class="field-textarea" name="notas" placeholder="Cualquier cosa que quieras contarnos..."></textarea>
     </div>
 
     <button class="submit-btn" id="rsvpSubmitBtn" type="submit">Confirmar asistencia</button>
   </form>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p class="footer-monogram">E & E</p>
   <p class="footer-sub" style="margin-bottom:6px;">12 &middot; 09 &middot; 26</p>
-  <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:13px;color:var(--brown-light);">Elena Maldonado & Enrique Gal&aacute;n</p>
+  <p style="font-size:13px;color:var(--brown-mid);">Elena Maldonado & Enrique Gal&aacute;n</p>
 </footer>
 
 <script>
-  // Pega aqu&iacute; la URL del Web App de Google Apps Script.
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzF9GhMjZZP8sJoUsA6w048nnL6gTFoP_W-B27ZIjQ-BT_t16VqkuRgZbwWbvjtjEGzGA/exec';
-
-  document.querySelectorAll('.menu-opt').forEach(opt => {
-    opt.addEventListener('click', function() {
-      document.querySelectorAll('.menu-opt').forEach(o => o.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
 
   const navLinks = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('section[id]');
@@ -1121,15 +954,14 @@
       return;
     }
 
-    const activeMenu = document.querySelector('#menuOpts .menu-opt.active');
     const formData = new FormData(rsvpForm);
 
     const payload = {
       fecha_envio: new Date().toISOString(),
       nombre_completo: formData.get('nombre_completo') || '',
       acompanante: formData.get('acompanante') || '',
-      asistentes: formData.get('asistentes') || '',
-      menu: activeMenu ? activeMenu.dataset.val : 'estandar',
+      asistentes: '',
+      menu: '',
       alergias: formData.get('alergias') || '',
       cancion: formData.get('cancion') || '',
       autobus: formData.get('autobus') || '',
@@ -1160,7 +992,6 @@
     try {
       postToGoogle(payload);
 
-      // Si hay acompañante, se añade también como registro independiente.
       if (acompananteNorm) {
         const payloadAcompanante = {
           ...payload,
@@ -1168,11 +999,10 @@
           nombre_completo_normalizado: acompananteNorm,
           acompanante: payload.nombre_completo,
           acompanante_normalizado: nombreNorm,
-          asistentes: '1 persona',
           tipo_registro: 'acompanante',
           notas: payload.notas
-            ? payload.notas + ' | Acompañante de ' + payload.nombre_completo
-            : 'Acompañante de ' + payload.nombre_completo
+            ? payload.notas + ' | Acompanante de ' + payload.nombre_completo
+            : 'Acompanante de ' + payload.nombre_completo
         };
         postToGoogle(payloadAcompanante);
       }
@@ -1180,9 +1010,6 @@
       alert('Gracias! Confirmacion enviada.');
       saveLocalRegisteredNames([nombreNorm, acompananteNorm]);
       rsvpForm.reset();
-      document.querySelectorAll('.menu-opt').forEach(o => o.classList.remove('active'));
-      const firstMenu = document.querySelector('#menuOpts .menu-opt');
-      if (firstMenu) firstMenu.classList.add('active');
     } catch (err) {
       alert('No se pudo enviar la confirmacion. Intentalo de nuevo.');
     } finally {
@@ -1191,3 +1018,5 @@
     }
   });
 </script>
+</body>
+</html>
